@@ -1,0 +1,37 @@
+python -m cellpose --dir C:\Users\24573\picture_test\ --pretrained_model nuclei --chan 0 --chan2 0 --save_png --use_gpu  --save_txt
+
+python -m cellpose --dir C:\Users\24573\Desktop\test1\ --pretrained_model C:\Users\24573\CELL\training\train_data\models\cellpose_residual_on_style_on_concatenation_off_train_data_2022_02_28_15_46_02.807286 --chan 2 --save_png --use_gpu  --save_txt --verbose
+
+python -m cellpose --train --train_size --use_gpu --dir C:\Users\24573\CELL\train\dataset --pretrained_model None
+
+python -m cellpose --train --train_size --use_gpu --dir C:\Users\24573\CELL\train\train4test --pretrained_model None --batch_size 2 --verbose
+
+
+1. labelme转成的mask和cellpose的trainset的mask区别
+
+注意mask的图片位数和模式（RGB/灰度）要和官方的数据是一致的
+
+相对的. import/.. import如果错误就用绝对的import 方式
+
+python C:\Users\24573\anaconda3\envs\cellpose\Lib\site-packages\labelme\cli\json_to_dataset.py C:\Users\24573\picture_test\0007_0002.json
+
+train: 414 419 425 428 429 435 436 437 440 442 445 446 447 449 450 452 454 382 395 219 220 243 173 188
+test: 024 025 050 
+
+331 334 432 444 248 432 
+
+python -m cellpose --train --train_size --use_gpu --dir C:\Users\24573\CELL\training\train_data --pretrained_model nuclei --chan 2 --chan2 2 --n_epochs 2000 --learning_rate 0.0125 --verbose
+
+cellpose的集群环境路径/jdfssz1/ST_SUPERCELLS/P21Z10200N0171/USER/shechenglong
+
+python -m cellpose --train --train_size --use_gpu --dir C:\Users\24573\CELL\training\train_data --pretrained_model C:\Users\24573\CELL\training\train_data\models\cellpose_residual_on_style_on_concatenation_off_train_data_2022_03_22_20_18_23.270306 --chan 2 --chan2 2 --n_epochs 2000 --learning_rate 0.0001 --verbose --batch_size 2
+
+--train --train_size --use_gpu --dir C:\Users\24573\CELL\training\train_unet --pretrained_model C:\Users\24573\CELL\training\train_unet\models\unet3_residual_on_style_on_concatenation_off_train_unet_2022_03_18_21_57_10.262491 --chan 2 --chan2 2 --n_epochs 2000 --unet 1 --verbose --nclasses 3 --batch_size 2 --learning_rate 0.00001
+
+python -m cellpose --dir C:\Users\24573\Desktop\test1\ --pretrained_model C:\Users\24573\CELL\training\train_data\models\cellpose_residual_on_style_on_concatenation_off_train_data_2022_03_22_20_18_23.270306 --chan 2 --save_png --use_gpu  --save_txt --verbose
+
+--dir C:\Users\24573\Desktop\test2\ --pretrained_model C:\Users\24573\CELL\training\train_data\models\cellpose_residual_on_style_on_concatenation_off_train_data_2022_03_22_20_18_23.270306 --chan 2 --save_png --use_gpu  --save_txt --verbose --flow_threshold 4.0 --mask_threshold -4
+
+python -m cellpose --train --train_size --use_gpu --dir E:\CELL\train --pretrained_model E:\CELL\train_data\models\cellpose_residual_on_style_on_concatenation_off_train_data_2022_03_22_20_18_23.270306 --n_epochs 500 --learning_rate 0.01 --verbose --batch_size 2
+
+python -m cellpose --train --train_size --use_gpu --dir /jdfssz1/ST_SUPERCELLS/P21Z10200N0171/USER/shechenglong/train --pretrained_model /jdfssz1/ST_SUPERCELLS/P21Z10200N0171/USER/shechenglong/train/models/cellpose_residual_on_style_on_concatenation_off_train_data_2022_03_22_20_18_23.270306 --n_epochs 500 --learning_rate 0.01 --verbose --batch_size 16

@@ -87,3 +87,9 @@ for annotation_filename in annotation_files: #遍历img文件夹下的txt文件
     print(full_path)
     with open(full_path, 'w') as output_json_file:
         json.dump(coco_output, output_json_file)
+    #  将原图转换为热力图
+    pic_path = IMAGE_DIR + name + '.png'
+    picture = cv2.imread(pic_path, cv2.IMREAD_ANYDEPTH)
+    heat_img = cv2.applyColorMap(picture, cv2.COLORMAP_JET)  # 注意此处的三通道热力图是cv2专有的GBR排列
+    heat_img = cv2.cvtColor(heat_img, cv2.COLOR_BGR2RGB)  # 将BGR图像转为RGB图像
+    cv2.imwrite(IMAGE_DIR + name + '_heat.png', heat_img)

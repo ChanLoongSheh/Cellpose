@@ -1,0 +1,13 @@
+1. shechenglong文件夹下的cellpose.sh为训练的脚本，可申请gpu权限提交该sh脚本
+2. raw_data是最原始的json文件和原始图片(未剪裁成224x224分辨率的子图)
+3. train文件夹里包含了剪裁成224x224分辨率的子图(原图、标签图、flow图)，以及还有model文件夹下训练好的模型(取日期最新的cellpose模型，unet模型也有)
+4. mask_rcnn文件夹存放了运行mask_rcnn模型的脚本具体可见链接：https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection/mask_rcnn
+        4.1 注意mask_rcnn训练的是coco数据集可参考链接：https://www.jianshu.com/p/4242171ea780，会用到shechenglong文件夹下的labelme库进行转换
+        4.2 注意mask_rcnn文件夹下的data文件夹存储的是label range后的训练数据，若按照二分类训练，则loss为nan无法训练。
+5. script文件夹是之前的图片注释说明中提到的文件夹，里面存放了各种转换的脚本，详情请见“cellpose细胞分割数据集注释流程说明（一）/（二）.html”文件
+6. anaconda3是python的环境里边有cellpose虚拟环境，cellpose的python解释器路径可见cellpose.sh脚本和“cellpose细胞分割数据集注释流程说明（一）/（二）.html”文件
+7. another_script存放了几个小脚本。
+        7.1 Ap_calculate.py是计算cellpose预测的标签图与测试集的标签图的评估指标AP，参考的cellpose论文的计算方式。输入为存放预测标签图的文件夹路径与测试集路径，注意两个文件夹下的图片文件名要对应一致
+        7.2 mask2json.py是将含有mask的标签图转成labelme可识别的json。输入是存储标签和原图的文件夹路径。注意：在该转换方法下，可能转出异常json文件，所以下一步一定要运行json_del&find.py检查
+        7.3 json_del&find.py是检查异常json文件的脚本。输入是存储json文件和原图的文件夹路径。
+        7.4 draw.py是画Ap_calculate.py计算的不同IoU阈值下的AP值，可以直接迁移到Ap_calculate.py脚本中
